@@ -61,6 +61,30 @@ namespace WinAuth
       InitializeComponent();
     }
 
+	private void searchTextBox_TextChanged(object sender, EventArgs e)
+	{
+    var q = searchTextBox.Text;
+    if (string.IsNullOrWhiteSpace(q))
+    {
+        // no filter – show everything
+        loadAuthenticatorList();
+    }
+    else
+    {
+        // filter by name (case-insensitive)
+        var matches = Config
+            .Cast<WinAuthAuthenticator>()
+            .Where(a => a.Name.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
+            .ToList();
+
+        authenticatorList.Items.Clear();
+        int i = 0;
+        foreach (var auth in matches)
+            authenticatorList.Items.Add(new AuthenticatorListitem(auth, i++));
+        authenticatorList.Visible = authenticatorList.Items.Count > 0;
+    }
+	}
+
 #region Properties
 
 		/// <summary>

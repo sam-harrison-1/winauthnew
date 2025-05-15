@@ -61,6 +61,16 @@
 			this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
 			this.loadingPanel = new MetroFramework.Controls.MetroPanel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.searchTextBox = new MetroFramework.Controls.MetroTextBox();
+			this.searchTextBox.PromptText   = "Search…";
+			this.searchTextBox.Size         = new System.Drawing.Size(380, 23);
+			this.searchTextBox.Location     = new System.Drawing.Point(20, 60);
+			this.searchTextBox.Anchor       = ((System.Windows.Forms.AnchorStyles)
+    			(System.Windows.Forms.AnchorStyles.Top
+  			  | System.Windows.Forms.AnchorStyles.Left
+  			  | System.Windows.Forms.AnchorStyles.Right));
+			this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+			this.Controls.Add(this.searchTextBox);
 			this.authenticatorMenu.SuspendLayout();
 			this.yubiPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.yubiImage)).BeginInit();
@@ -304,7 +314,7 @@
 			this.authenticatorList.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
 			this.authenticatorList.IntegralHeight = false;
 			this.authenticatorList.ItemHeight = 64;
-			this.authenticatorList.Location = new System.Drawing.Point(20, 60);
+			this.authenticatorList.Location = new System.Drawing.Point(20, 90);
 			this.authenticatorList.Name = "authenticatorList";
 			this.authenticatorList.ReadOnly = false;
 			this.authenticatorList.SelectionMode = System.Windows.Forms.SelectionMode.None;
@@ -387,6 +397,7 @@
 
 		#endregion
 
+		private MetroFramework.Controls.MetroTextBox searchTextBox;
 		private MetroFramework.Components.MetroStyleManager metroStyleManager;
 		private MetroFramework.Components.MetroStyleExtender metroStyleExtender;
 		private AuthenticatorListBox authenticatorList;
