@@ -70,7 +70,21 @@
   			  | System.Windows.Forms.AnchorStyles.Left
   			  | System.Windows.Forms.AnchorStyles.Right));
 			this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+			this.searchTextBox.Visible      = false; 
 			this.Controls.Add(this.searchTextBox);
+			this.noResultsLabel = new MetroFramework.Controls.MetroLabel();
+			this.noResultsLabel.AutoSize = true;
+			this.noResultsLabel.Location = new System.Drawing.Point(20, 90);
+			this.noResultsLabel.Name = "noResultsLabel";
+			this.noResultsLabel.Size = new System.Drawing.Size(100, 19);
+			this.noResultsLabel.TabIndex = 2;
+			this.noResultsLabel.Text = "NO RESULTS";
+			this.noResultsLabel.Visible = false;
+			this.noResultsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)
+			(System.Windows.Forms.AnchorStyles.Top
+			| System.Windows.Forms.AnchorStyles.Left
+			| System.Windows.Forms.AnchorStyles.Right));
+			this.Controls.Add(this.noResultsLabel);
 			this.authenticatorMenu.SuspendLayout();
 			this.yubiPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.yubiImage)).BeginInit();
@@ -305,9 +319,10 @@
 			// authenticatorList
 			// 
 			this.authenticatorList.AllowDrop = true;
-			this.authenticatorList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.authenticatorList.Anchor = ((System.Windows.Forms.AnchorStyles)
+   			(System.Windows.Forms.AnchorStyles.Top
+			| System.Windows.Forms.AnchorStyles.Left
+  			| System.Windows.Forms.AnchorStyles.Right));
 			this.authenticatorList.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.authenticatorList.CurrentItem = null;
 			this.authenticatorList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -398,6 +413,7 @@
 		#endregion
 
 		private MetroFramework.Controls.MetroTextBox searchTextBox;
+		private MetroFramework.Controls.MetroLabel noResultsLabel;
 		private MetroFramework.Components.MetroStyleManager metroStyleManager;
 		private MetroFramework.Components.MetroStyleExtender metroStyleExtender;
 		private AuthenticatorListBox authenticatorList;

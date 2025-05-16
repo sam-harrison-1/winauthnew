@@ -63,26 +63,29 @@ namespace WinAuth
 
 	private void searchTextBox_TextChanged(object sender, EventArgs e)
 	{
-    var q = searchTextBox.Text;
-    if (string.IsNullOrWhiteSpace(q))
-    {
+    	var q = searchTextBox.Text;
+    	if (string.IsNullOrWhiteSpace(q))
+    	{
         // no filter – show everything
-        loadAuthenticatorList();
-    }
-    else
-    {
-        // filter by name (case-insensitive)
-        var matches = Config
-            .Cast<WinAuthAuthenticator>()
-            .Where(a => a.Name.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
-            .ToList();
+        	loadAuthenticatorList();
+    	}
+    	else
+    	{
+        	// filter by name (case-insensitive)
+        	var matches = Config
+            	.Cast<WinAuthAuthenticator>()
+            	.Where(a => a.Name.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
+            	.ToList();
 
-        authenticatorList.Items.Clear();
-        int i = 0;
-        foreach (var auth in matches)
-            authenticatorList.Items.Add(new AuthenticatorListitem(auth, i++));
-        authenticatorList.Visible = authenticatorList.Items.Count > 0;
-    }
+        	authenticatorList.Items.Clear();
+        	int i = 0;
+        	foreach (var auth in matches)
+            	authenticatorList.Items.Add(new AuthenticatorListitem(auth, i++));
+
+        	bool hasResults = (matches.Count > 0);
+        	authenticatorList.Visible  = hasResults;
+        	noResultsLabel.Visible     = !hasResults;
+    	}
 	}
 
 #region Properties
@@ -836,23 +839,28 @@ namespace WinAuth
 		/// <param name="added">authenticator we just added</param>
 		private void loadAuthenticatorList(WinAuthAuthenticator added = null)
 		{
-			// set up list
-			authenticatorList.Items.Clear();
+    		// set up list
+    		authenticatorList.Items.Clear();
 
-			int index = 0;
-			foreach (var auth in Config)
-			{
-				var ali = new AuthenticatorListitem(auth, index);
-				if (added != null && added == auth && auth.AutoRefresh == false && !(auth.AuthenticatorData is HOTPAuthenticator))
-				{
-					ali.LastUpdate = DateTime.Now;
-					ali.DisplayUntil = DateTime.Now.AddSeconds(10);
-				}
-				authenticatorList.Items.Add(ali);
-				index++;
-			}
+    		int index = 0;
+    		foreach (var auth in Config)
+    		{
+        		var ali = new AuthenticatorListitem(auth, index);
+        		if (added != null && added == auth && auth.AutoRefresh == false && !(auth.AuthenticatorData is HOTPAuthenticator))
+        		{
+            		ali.LastUpdate = DateTime.Now;
+            		ali.DisplayUntil = DateTime.Now.AddSeconds(10);
+        		}
+        		authenticatorList.Items.Add(ali);
+        		index++;
+    		}
 
-			authenticatorList.Visible = (authenticatorList.Items.Count != 0);
+    		bool hasAny = (authenticatorList.Items.Count != 0);
+    		authenticatorList.Visible = hasAny;
+
+    		searchTextBox.Visible   = hasAny;
+
+    		noResultsLabel.Visible  = false;
 		}
 
 		/// <summary>
