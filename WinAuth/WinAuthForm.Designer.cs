@@ -320,9 +320,10 @@
 			// 
 			this.authenticatorList.AllowDrop = true;
 			this.authenticatorList.Anchor = ((System.Windows.Forms.AnchorStyles)
-   			(System.Windows.Forms.AnchorStyles.Top
-			| System.Windows.Forms.AnchorStyles.Left
-  			| System.Windows.Forms.AnchorStyles.Right));
+				(System.Windows.Forms.AnchorStyles.Top
+				| System.Windows.Forms.AnchorStyles.Bottom
+				| System.Windows.Forms.AnchorStyles.Left
+				| System.Windows.Forms.AnchorStyles.Right));
 			this.authenticatorList.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.authenticatorList.CurrentItem = null;
 			this.authenticatorList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;

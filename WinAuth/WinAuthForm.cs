@@ -86,6 +86,7 @@ namespace WinAuth
         	authenticatorList.Visible  = hasResults;
         	noResultsLabel.Visible     = !hasResults;
     	}
+		setAutoSize();
 	}
 
 #region Properties
@@ -763,6 +764,9 @@ namespace WinAuth
 
 			// hook Steam notifications
 			HookSteam();
+
+			searchTextBox.Visible   = authenticatorList.Visible;
+			noResultsLabel.Visible  = false;
 
 			// save the position of the list within the form else starting as minimized breaks the size
 			_listoffset = new Rectangle(authenticatorList.Left, authenticatorList.Top, (this.Width - authenticatorList.Width), (this.Height - authenticatorList.Height));
