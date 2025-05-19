@@ -773,9 +773,6 @@ namespace WinAuth
 			// save the position of the list within the form else starting as minimized breaks the size
 			_listoffset = new Rectangle(authenticatorList.Left, authenticatorList.Top, (this.Width - authenticatorList.Width), (this.Height - authenticatorList.Height));
 
-			commandPanel.BringToFront();
-
-			WinAuthForm_Resize(this, EventArgs.Empty);
 
 			// set the shadow type (change in config for compatibility)
 			try
@@ -1628,11 +1625,13 @@ namespace WinAuth
 		/// <param name="e"></param>
 		private void WinAuthForm_Shown(object sender, EventArgs e)
 		{
-			if (commandPanel != null)
-    			commandPanel.BringToFront();
+			this.BeginInvoke((MethodInvoker)(() =>
+  			{
+    			if (commandPanel != null)
+      				commandPanel.BringToFront();
 
-			WinAuthForm_Resize(this, EventArgs.Empty);
-			
+    			WinAuthForm_Resize(this, EventArgs.Empty);
+  			}));
 			// if we use tray icon make sure it is set
 			if (this.Config != null && this.Config.UseTrayIcon == true)
 			{
