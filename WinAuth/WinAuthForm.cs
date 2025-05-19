@@ -71,7 +71,7 @@ namespace WinAuth
     	}
     	else
     	{
-        	// filter by name (case-insensitive)
+        	// filter by name (case‐insensitive)
         	var matches = Config
             	.Cast<WinAuthAuthenticator>()
             	.Where(a => a.Name.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)
@@ -82,13 +82,15 @@ namespace WinAuth
         	foreach (var auth in matches)
             	authenticatorList.Items.Add(new AuthenticatorListitem(auth, i++));
 
-        	bool hasResults = (matches.Count > 0);
-        	authenticatorList.Visible  = hasResults;
-        	noResultsLabel.Visible     = !hasResults;
-    	}
-		setAutoSize();
-	}
+        	bool hasResults = matches.Count > 0;
+        	authenticatorList.Visible = hasResults;
+        	noResultsLabel.Visible    = !hasResults;
 
+        // **only** autosize if we actually have something to size around
+        	if (hasResults)
+            	setAutoSize();
+    	}
+	}
 #region Properties
 
 		/// <summary>
