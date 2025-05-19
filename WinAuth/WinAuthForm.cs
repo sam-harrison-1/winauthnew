@@ -2080,13 +2080,19 @@ namespace WinAuth
 		/// <param name="e"></param>
 		private void WinAuthForm_Resize(object sender, EventArgs e)
 		{
-			this.SuspendLayout();
-			if (_listoffset.Bottom != 0)
-			{
-				authenticatorList.Height = this.Height - _listoffset.Height;
-				authenticatorList.Width = this.Width - _listoffset.Width;
-			}
-			this.ResumeLayout(true);
+    		this.SuspendLayout();
+    		if (_listoffset.Bottom != 0)
+    		{
+        		int reserved = commandPanel.Visible ? commandPanel.Height : 0;
+
+        		authenticatorList.Height = this.Height
+                                   	   	   - _listoffset.Height
+                                   	       - reserved;
+
+        		authenticatorList.Width  = this.Width
+                                           - _listoffset.Width;
+    		}
+    		this.ResumeLayout(true);
 		}
 
 		/// <summary>
