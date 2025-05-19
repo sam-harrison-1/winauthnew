@@ -757,6 +757,8 @@ namespace WinAuth
 			authenticatorList.Visible = (this.Config.Count != 0);
 			this.addAuthenticatorButton.Visible = !this.Config.IsReadOnly;
 
+			commandPanel.BringToFront();
+
 			// set title
 			notifyIcon.Visible = this.Config.UseTrayIcon;
 			notifyIcon.Text = this.Text = WinAuthMain.APPLICATION_TITLE;
@@ -773,7 +775,7 @@ namespace WinAuth
 			// save the position of the list within the form else starting as minimized breaks the size
 			_listoffset = new Rectangle(authenticatorList.Left, authenticatorList.Top, (this.Width - authenticatorList.Width), (this.Height - authenticatorList.Height));
 
-
+			WinAuthForm_Resize(this, EventArgs.Empty);
 			// set the shadow type (change in config for compatibility)
 			try
 			{
