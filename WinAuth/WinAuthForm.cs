@@ -1628,6 +1628,11 @@ namespace WinAuth
 		/// <param name="e"></param>
 		private void WinAuthForm_Shown(object sender, EventArgs e)
 		{
+			if (commandPanel != null)
+    			commandPanel.BringToFront();
+
+			WinAuthForm_Resize(this, EventArgs.Empty);
+			
 			// if we use tray icon make sure it is set
 			if (this.Config != null && this.Config.UseTrayIcon == true)
 			{
